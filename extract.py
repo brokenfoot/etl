@@ -2,6 +2,7 @@
 Handles the downloading of raw data from LAUS
 """
 import pandas as pd
+import os.path
 
 
 def get_bls_dataframe(url_endpoint):
@@ -48,9 +49,17 @@ def download_laus_data():
         'la.state_region_division'
     ]
 
+    directory = 'raw_csv_files'
+
+    if not os.path.exists(directory):
+        os.mkdirs(directory)
+
     for url in urls:
         df = get_bls_dataframe(url)
-        df.to_csv('raw_csv_files/' + url + '.csv', index = False)
+        df.to_csv(
+            '{}/{}'.format(directory, url + '.csv'),
+            index = False
+        )
 
 
 if __name__ == '__main__':

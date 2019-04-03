@@ -10,6 +10,9 @@ def transform_laus_data():
     """
     directory = 'raw_csv_files/'
 
+    if not os.path.exists(directory):
+        os.mkdirs(directory)
+
     for filename in os.listdir(directory):
         if filename.endswith(".csv"):
             # load into memory
